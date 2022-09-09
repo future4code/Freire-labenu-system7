@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
-import connection from "../connection";
-//import types from "../types/types"
+import createTurma from "../data/createTurma";
+import { getTurma } from "../services/getTurma";
+
 
 export const criarTurma = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const id = Date.now().toString();
-    const { nome, modulo } = req.body;
+    const id = req.params.id
 
-    await connection("turma")
-    .insert({ id, nome, modulo });
-
+    const turma = await getTurma(id)
+    if (!turma || undefined){
+      throw new Error("ID inválido")
+    }await createTurma(turma)
     res.status(200).send("Turma cadastrada com sucesso");
 
   } catch (error: any) {
