@@ -1,0 +1,15 @@
+PUT http://localhost:3003/turma
+Content-Type: application/json
+
+{
+    "nome": "BR",
+    "modulo": "5"
+}
+
+###
+
+GET http://localhost:3003/users
+
+###
+
+
